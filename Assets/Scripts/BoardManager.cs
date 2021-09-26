@@ -36,9 +36,10 @@ public class BoardManager : MonoBehaviour
     [Header("Tile")]
     public List<Sprite> tileTypes = new List<Sprite>();
     public GameObject tilePrefab;
+    public GameObject TextBonusPrefab;
 
-    public bool IsAnimating 
-    { 
+    public bool IsAnimating
+    {
         get
         {
             return IsProcessing || IsSwapping;
@@ -168,7 +169,11 @@ public class BoardManager : MonoBehaviour
         }
 
         combo++;
+
         ScoreManager.Instance.IncrementCurrentScore(matchingTiles.Count, combo);
+
+        //tambah durasi
+        ScoreManager.Instance.IncerementDuration(matchingTiles.Count, combo);
 
         StartCoroutine(ClearMatches(matchingTiles, ProcessDrop));
     }

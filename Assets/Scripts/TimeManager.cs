@@ -7,7 +7,6 @@ public class TimeManager : MonoBehaviour
     #region Singleton
 
     private static TimeManager _instance = null;
-
     public static TimeManager Instance
     {
         get

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class ScoreManager : MonoBehaviour
 
     private int currentScore;
 
+    private int bonusTime;
+    public Text bonusText;
+
     private void Start()
     {
         ResetCurrentScore();
@@ -45,7 +49,8 @@ public class ScoreManager : MonoBehaviour
 
     public void ResetCurrentScore()
     {
-        currentScore = 0; 
+        currentScore = 0;
+        bonusText.text = "";
     }
 
     public void IncrementCurrentScore(int tileCount, int comboCount)
@@ -53,6 +58,22 @@ public class ScoreManager : MonoBehaviour
         currentScore += (tileCount * tileRatio) * (comboCount * comboRatio);
 
         SoundManager.Instance.PlayScore(comboCount > 1);
+    }
+
+    public void IncerementDuration(int tileCount, int comboCount)
+    {
+        //algoritma bonus time
+        bonusTime = (comboCount-1)*3+tileCount-1;
+        TimeManager.Instance.duration += bonusTime;
+        StartCoroutine(setBonusText());
+    }
+
+    //menampilkan text ke ui
+    IEnumerator setBonusText()
+    {
+        bonusText.text = "+" + bonusTime + "s";
+        yield return new WaitForSeconds(2);
+        bonusText.text = "";
     }
 
     public void SetHighScore()

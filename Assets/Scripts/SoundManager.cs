@@ -35,6 +35,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip tap;
 
+    public AudioClip gameOver;
+
     private AudioSource player;
 
     private void Start()
@@ -62,5 +64,10 @@ public class SoundManager : MonoBehaviour
     public void PlayTap()
     {
         player.PlayOneShot(tap);
+    }
+
+    public void PlayGameOver()
+    {
+        player.PlayOneShot(gameOver);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIGameOver : MonoBehaviour
 {
+    public AudioSource audioBGM;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -15,6 +16,8 @@ public class UIGameOver : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+        audioBGM.Stop();
+        SoundManager.Instance.PlayGameOver();
     }
 
     public void Hide()
